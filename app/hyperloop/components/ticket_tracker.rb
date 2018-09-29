@@ -15,7 +15,10 @@
     before_mount do
       # any initialization particularly of state variables goes here.
       # this will execute on server (prerendering) and client.
+      # @tickettrackermodels = Ticket.by_priority.all  ### Uncomment for bug
       @tickettrackermodels = Ticket.all
+
+      TicketStore.mutate.priority 2
     end
 
     after_mount do
@@ -49,20 +52,26 @@
           TicketStore.mutate.description ev.target.value
         end
 
-        SELECT(value: 1, class: 'form-control') do
+        SELECT(class: 'form-control', value: 2) do
           OPTION(value: 1) {"1 - Low"}
           OPTION(value: 2) {"2 - Medium"}
           OPTION(value: 3) {"3 - High"}
+        end.on(:change) do |ev|
+          TicketStore.mutate.priority ev.target.value
         end
-
 
         BUTTON(class: 'btn btn-warning') do
             "Add Ticket"
           end.on(:click) do |ev|
-            Ticket.create(title: TicketStore.title, description: TicketStore.description) do |result|
-              alert "unable to save" unless result == true
+            alert "priority is now #{TicketStore.priority}"
+            Ticket.create(
+              title: TicketStore.title,
+              description: TicketStore.description,
+              priority: TicketStore.priority) do |result|
+                alert "unable to save" unless result == true
             TicketStore.mutate.title ''
             TicketStore.mutate.description ''
+            TicketStore.mutate.priority 2
           end
         end
       end
@@ -76,6 +85,7 @@
           THEAD do
             TR do
               TD { "ID" }
+              TD { "Pri" }
               TD { "Title" }
               TD { "Description" }
               TD { "Created" }
@@ -93,6 +103,7 @@
     def table_row(ticket)
       TR do
         TD { "%06d" % ticket.id }
+        TD { ticket.priority.to_s }
         TD { ticket.title }
         TD { ticket.description }
         TD { ticket.created_at.class == String ? '---' : ticket.created_at.strftime("%Y-%m-%d") }

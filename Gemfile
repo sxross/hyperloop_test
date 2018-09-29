@@ -30,7 +30,12 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# gem "mini-racer", '~> 0.1.15'
 gem "hyperloop"
+
+# gem "opal-jquery", git: "https://github.com/opal/opal-jquery.git", branch: "master"
+# gem "hyperloop", '= 1.0.0.lap27'
+# gem 'libv8', '6.3.292.48.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -50,6 +55,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails'
+  gem 'pry-rescue'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
