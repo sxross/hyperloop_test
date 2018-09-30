@@ -16,7 +16,7 @@
       # any initialization particularly of state variables goes here.
       # this will execute on server (prerendering) and client.
       # @tickettrackermodels = Ticket.by_priority.all  ### Uncomment for bug
-      @tickettrackermodels = Ticket.all
+      @tickettrackermodels = Ticket.by_priority
 
       TicketStore.mutate.priority 2
     end
@@ -53,9 +53,9 @@
         end
 
         SELECT(class: 'form-control', value: 2) do
-          OPTION(value: 1) {"1 - Low"}
+          OPTION(value: 1) {"1 - High"}
           OPTION(value: 2) {"2 - Medium"}
-          OPTION(value: 3) {"3 - High"}
+          OPTION(value: 3) {"3 - Low"}
         end.on(:change) do |ev|
           TicketStore.mutate.priority ev.target.value
         end
@@ -63,7 +63,6 @@
         BUTTON(class: 'btn btn-warning') do
             "Add Ticket"
           end.on(:click) do |ev|
-            alert "priority is now #{TicketStore.priority}"
             Ticket.create(
               title: TicketStore.title,
               description: TicketStore.description,
@@ -84,11 +83,9 @@
         TABLE(class: 'table table-hover table-condensed') do
           THEAD do
             TR do
-              TD { "ID" }
-              TD { "Pri" }
-              TD { "Title" }
-              TD { "Description" }
-              TD { "Created" }
+              ["ID", "Pri", "Title", "Description", "Created"].each do |title|
+                TD { title }
+              end
             end # TR
           end # THEAD
           TBODY do
