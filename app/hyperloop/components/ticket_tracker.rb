@@ -80,10 +80,10 @@
     def ticket_table
       DIV do
         BR{}
-        TABLE(class: 'table table-hover table-condensed') do
+        TABLE(class: 'table table-hover table-condensed table-sm') do
           THEAD do
             TR do
-              ["ID", "Pri", "Title", "Description", "Created"].each do |title|
+              ["ID", "Pri", "Title/Description", "Created"].each do |title|
                 TD { title }
               end
             end # TR
@@ -101,8 +101,11 @@
       TR do
         TD { "%06d" % ticket.id }
         TD { ticket.priority.to_s }
-        TD { ticket.title }
-        TD { ticket.description }
+        TD do
+          B { ticket.title }
+          BR {}
+          P { ticket.description }
+         end
         TD { ticket.created_at.class == String ? '---' : ticket.created_at.strftime("%Y-%m-%d") }
       end
     end
