@@ -83,7 +83,7 @@
         TABLE(class: 'table table-hover table-condensed table-sm') do
           THEAD do
             TR do
-              ["ID", "Pri", "Title/Description", "Created"].each do |title|
+              ["ID", "Pri", "Title/Description", "Created/Closed"].each do |title|
                 TD { title }
               end
             end # TR
@@ -106,7 +106,14 @@
           BR {}
           P { ticket.description }
          end
-        TD { ticket.created_at.class == String ? '---' : ticket.created_at.strftime("%Y-%m-%d") }
+        TD do
+          P {
+            "Open: #{ticket.created_at.class == String ? '---' : ticket.created_at.strftime("%Y-%m-%d")}"
+          }
+          P {
+            "Close: #{ticket.closed_at.class == String ? '---' : ticket.closed_at.strftime("%Y-%m-%d")}"
+          } unless ticket.closed_at.nil?
+        end
       end
     end
   end
