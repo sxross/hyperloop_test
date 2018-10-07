@@ -35,10 +35,15 @@
     end
 
     def render
-      DIV(class: 'Tickettracker') do
-        "Ticket Tracker"
-        input_box
-        ticket_table
+      DIV do
+        Header()
+        div.container do
+          DIV(class: 'Tickettracker') do
+            "Ticket Tracker"
+            input_box
+            ticket_table
+          end
+        end
       end
     end
 

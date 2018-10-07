@@ -2,7 +2,7 @@ class App < Hyperloop::Router
 
   route do
     DIV do
-      "App"
+      history :browser
       # define routes using the Route psuedo component.  Examples:
       # Route('/foo', mounts: Foo)                : match the path beginning with /foo and mount component Foo here
       # Route('/foo') { Foo(...) }                : display the contents of the block
@@ -12,4 +12,3 @@ class App < Hyperloop::Router
     end
   end
 end
-

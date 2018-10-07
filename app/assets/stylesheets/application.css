@@ -14,10 +14,19 @@
  *= require_self
  */
 body {
-  background-color: #333;
-  color: #eee;
+  /* background-color: #333;
+  color: #eee; */
 }
 
 .Tickettracker {
   margin-top: 3em;
+}
+
+.outlined {
+  border: 1px 1px 1px 1px;
+  border-color: green;
+}
+
+.spacer {
+  padding-right: 10px;
 }
