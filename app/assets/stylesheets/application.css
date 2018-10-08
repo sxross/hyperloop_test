@@ -30,3 +30,7 @@ body {
 .spacer {
   padding-right: 10px;
 }
+
+.click-target {
+  cursor: pointer;
+}

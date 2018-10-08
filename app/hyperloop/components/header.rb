@@ -58,6 +58,7 @@ class Header < Hyperloop::Component
   def show_input_box
     form.navbar_form.navbar_left.form_inline(role: :search) do
       div.form_group do
+        SPAN(class: "spacer") { "Log in: "}
         input.form_control.outlined.spacer(type: :text, value: state.user_name_input, placeholder: "Enter Your User ID"
         ).on(:change) do |e|
           mutate.user_name_input e.target.value

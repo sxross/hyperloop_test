@@ -119,6 +119,12 @@
             "Close: #{ticket.closed_at.class == String ? '---' : ticket.closed_at.strftime("%Y-%m-%d")}"
           } unless ticket.closed_at.nil?
         end
+        TD do
+          SPAN(class: 'click-target') { 'X' }.on(:click) do
+            alert 'clicked'
+            ticket.destroy
+          end
+        end
       end
     end
   end
