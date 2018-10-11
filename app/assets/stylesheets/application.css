@@ -34,3 +34,7 @@ body {
 .click-target {
   cursor: pointer;
 }
+
+.closed {
+  color: #aaa;
+}

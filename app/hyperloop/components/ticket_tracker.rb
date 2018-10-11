@@ -103,7 +103,9 @@
     end
 
     def table_row(ticket)
-      TR do
+      css_class = ticket.closed? ? "closed" : ""
+
+      TR(class: css_class) do
         TD { "%06d" % ticket.id }
         TD { ticket.priority.to_s }
         TD do
@@ -120,9 +122,14 @@
           } unless ticket.closed_at.nil?
         end
         TD do
-          SPAN(class: 'click-target') { 'X' }.on(:click) do
-            alert 'clicked'
-            ticket.destroy
+          SPAN(class: 'click-target') { "\u2713" }.on(:click) do
+            if ticket.closed?
+              ticket.closed_at = nil
+              ticket.save!
+            else
+              ticket.closed_at = Time.now
+              ticket.save!
+            end
           end
         end
       end
