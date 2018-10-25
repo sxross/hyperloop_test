@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # gem "mini-racer", '~> 0.1.15'
 gem "hyperloop"
 
+gem 'devise'
+
 # gem "opal-jquery", git: "https://github.com/opal/opal-jquery.git", branch: "master"
 # gem "hyperloop", '= 1.0.0.lap27'
 # gem 'libv8', '6.3.292.48.1'

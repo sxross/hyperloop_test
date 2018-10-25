@@ -1,4 +1,8 @@
+require 'opal-jquery'
+
 class Header < Hyperloop::Component
+  include Browser
+
   before_mount do
     mutate.user_name_input ''
   end
@@ -57,26 +61,31 @@ class Header < Hyperloop::Component
 
   def show_input_box
     form.navbar_form.navbar_left.form_inline(role: :search) do
-      div.form_group do
-        SPAN(class: "spacer") { "Log in: "}
-        input.form_control.outlined.spacer(type: :text, value: state.user_name_input, placeholder: "Enter Your User ID"
-        ).on(:change) do |e|
-          mutate.user_name_input e.target.value
-        end
-        button.btn.btn_default.btn_outline_success(type: :button) { "login!" }.on(:click) do
-          TicketStore.mutate.user_name state.user_name_input
-        end if valid_new_input?
-      end
+      P { "hello" }
+      # div.form_group do
+      #   SPAN(class: "spacer") { "Log in: "}
+      #   # ).on(:change) do |e|
+      #   #   mutate.user_name_input e.target.value
+      #   # end
+      #   # button.btn.btn_default.btn_outline_success(type: :button) { "login!" }.on(:click) do
+      #   #   TicketStore.mutate.user_name state.user_name_input
+      #   # end if valid_new_input?
+      # end
     end
   end
 
   def show_greeting
     DIV do
       SPAN(class: "spacer") { "Hello #{TicketStore.user_name}" }
-      button.btn.btn_default.btn_outline_success(type: :button) { "logout!" }.on(:click) do
-        TicketStore.mutate.user_name ''
-        mutate.user_name_input ''
-      end
+      button.btn.btn_default.btn_outline_success(type: :button, href: '#') { "logout!" }.on(:click) do
+        HTTP.delete("/users/sign_out").then do
+          alert "logged out"
+          TicketStore.mutate.user_name ''
+          mutate.user_name_input ''
+          `window.location.href = '/'`
+          # window.location.href = "/"
+        end
+        end
     end
   end
 

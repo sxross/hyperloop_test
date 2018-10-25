@@ -1,3 +1,5 @@
+require 'opal-jquery'
+
 
   class Tickettracker < Hyperloop::Component
 
@@ -125,10 +127,12 @@
           SPAN(class: 'click-target') { "\u2713" }.on(:click) do
             if ticket.closed?
               ticket.closed_at = nil
-              ticket.save!
+              ticket.save
+              # TODO: Add failure handling
             else
               ticket.closed_at = Time.now
-              ticket.save!
+              ticket.save
+              # TODO: Add failure handling
             end
           end
         end
