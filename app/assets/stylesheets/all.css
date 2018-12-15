@@ -23,3 +23,8 @@ body {
 .closed {
   color: #aaa;
 }
+
+.middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}

@@ -17,8 +17,9 @@ require 'opal-jquery'
     before_mount do
       # any initialization particularly of state variables goes here.
       # this will execute on server (prerendering) and client.
-      # @tickettrackermodels = Ticket.by_priority.all  ### Uncomment for bug
-      @tickettrackermodels = Ticket.by_priority
+      # @all_ticket = Ticket.by_priority.all  ### Uncomment for bug
+      @all_tickets  = Ticket.by_open_and_priority
+      @open_tickets = Ticket.open_items
 
       TicketStore.mutate.priority 2
     end
@@ -38,7 +39,7 @@ require 'opal-jquery'
 
     def render
       DIV do
-        Header()
+        Header(ticket_count: @all_tickets.count, open_ticket_count: @open_tickets.count)
         div.container do
           DIV(class: 'Tickettracker') do
             "Ticket Tracker"
@@ -96,7 +97,7 @@ require 'opal-jquery'
             end # TR
           end # THEAD
           TBODY do
-            @tickettrackermodels.each do |ticket|
+            @all_tickets.each do |ticket|
               table_row ticket
             end
           end
