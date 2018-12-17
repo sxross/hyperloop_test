@@ -11,14 +11,13 @@ class Header < Hyperloop::Component
   end
 
   def render
-    # div.navbar.navbar_inverse.navbar_fixed_top do
-    #   div.container do
-    #     div.navbar_collapse(id: 'navbar') do     # removed .collapse
-    #       show_greeting
-    #     end
-    #   end
-    # end
-    show_greeting
+    div.navbar.navbar_inverse.navbar_fixed_top do
+      div.container do
+        div.navbar_collapse(id: 'navbar') do     # removed .collapse
+          show_greeting
+        end
+      end
+    end
   end
 
   def show_input_box
